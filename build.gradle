@@ -1,0 +1,46 @@
+plugins {
+    id "application"
+    id "java"
+    id "groovy"
+    id "org.jetbrains.kotlin.jvm" version "1.7.10"
+    id "org.springframework.boot" version "2.7.2"
+    id "io.spring.dependency-management" version "1.0.12.RELEASE"
+}
+
+group = "cz.lobodinsti.test"
+version = "0.0.1-SNAPSHOT"
+
+sourceCompatibility = "17"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10"
+
+    testImplementation "org.codehaus.groovy:groovy:3.0.12"
+    testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
+    testImplementation "org.spockframework:spock-core"
+}
+
+application {
+    mainClass = "cz.lobodinsti.test.ApplicationKt"
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        exceptionFormat "full"
+    }
+}
+
+tasks.compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "17"
+    }
+}

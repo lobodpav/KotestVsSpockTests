@@ -23,6 +23,7 @@ dependencies {
     testImplementation "org.codehaus.groovy:groovy:3.0.12"
     testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
     testImplementation "org.spockframework:spock-core"
+    testImplementation "io.kotest:kotest-runner-junit5:5.4.2"
 }
 
 application {

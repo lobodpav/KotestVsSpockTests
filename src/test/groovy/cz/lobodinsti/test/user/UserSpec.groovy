@@ -1,4 +1,4 @@
-package cz.lobodinsti.test
+package cz.lobodinsti.test.user
 
 import cz.lobodinsti.test.user.User
 import spock.lang.Specification

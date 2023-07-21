@@ -1,7 +1,10 @@
 package cz.lobodinsti.test.user
 
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
+
+data class UserTestData(val famous: Boolean, val id: Long, val username: String, val age: Long)
 
 class UserServiceSpec : DescribeSpec({
     // shared state / functions for all tests
@@ -23,6 +26,21 @@ class UserServiceSpec : DescribeSpec({
             userService.createUser(false).run {
                 username shouldBe "Tonda"
                 age shouldBe 37
+            }
+        }
+    }
+
+    describe("should create user (data test)") {
+        withData(
+            UserTestData(true, 0, "Zeman", 78),
+            UserTestData(false, 1, "Tonda", 37),
+        ) { (famous, expectedId, expectedUsername, expectedAge) ->
+            val user = userService.createUser(famous)
+
+            with(user) {
+                id shouldBe expectedId
+                username shouldBe expectedUsername
+                age shouldBe expectedAge
             }
         }
     }
